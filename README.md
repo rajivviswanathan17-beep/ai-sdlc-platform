@@ -35,7 +35,7 @@ The AI-Driven SDLC Platform transforms traditional software development by autom
 ### Installation
 ```bash
 # Clone and setup
-git clone https://github.com/yourusername/ai-sdlc-platform.git
+git clone https://github.com/rajivviswanathan17-beep/ai-sdlc-platform.git
 cd ai-sdlc-platform
 npm run install:all
 
