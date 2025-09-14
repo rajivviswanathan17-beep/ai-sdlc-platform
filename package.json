@@ -1,0 +1,141 @@
+{
+  "name": "ai-sdlc-platform",
+  "version": "1.0.0",
+  "description": "AI-Driven SDLC Collaboration Platform - Revolutionizing software development through intelligent human-AI collaboration",
+  "keywords": [
+    "ai",
+    "sdlc", 
+    "product-requirements",
+    "user-stories",
+    "automation",
+    "collaboration",
+    "agile",
+    "product-management"
+  ],
+  "author": {
+    "name": "AI-SDLC Platform Team",
+    "email": "team@ai-sdlc-platform.com",
+    "url": "https://github.com/yourusername/ai-sdlc-platform"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/yourusername/ai-sdlc-platform#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/ai-sdlc-platform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/ai-sdlc-platform/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev", 
+    "dev:watch": "nodemon --watch backend/src --ext js,ts --exec \"npm run dev:backend\"",
+    "dev:prompts": "chokidar 'docs/ai-prompts/**/*.md' -c 'echo \"AI prompts updated - restart AI services if needed\"'",
+    
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "cd backend && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    
+    "start": "npm run start:backend",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm start",
+    
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd backend && npm test",
+    "test:frontend": "cd frontend && npm test",
+    "test:integration": "cd backend && npm run test:integration",
+    "test:e2e": "cd frontend && npm run test:e2e",
+    "test:ai": "cd backend && npm run test:ai",
+    "test:db": "cd backend && npm run test:db",
+    "test:integrations": "cd backend && npm run test:integrations",
+    
+    "install:all": "npm install && npm run install:backend && npm run install:frontend",
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    
+    "db:setup": "cd backend && npm run db:migrate && npm run db:seed",
+    "db:migrate": "cd backend && npm run db:migrate",
+    "db:seed": "cd backend && npm run db:seed",
+    "db:reset": "cd backend && npm run db:reset",
+    
+    "seed:sample-data": "cd backend && npm run seed:sample-data",
+    "seed:demo-users": "cd backend && npm run seed:demo-users",
+    
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:backend": "cd backend && npm run lint",
+    "lint:frontend": "cd frontend && npm run lint",
+    "lint:fix": "npm run lint:backend -- --fix && npm run lint:frontend -- --fix",
+    
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\" --ignore-path .gitignore",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\" --ignore-path .gitignore",
+    
+    "type-check": "npm run type-check:backend && npm run type-check:frontend",
+    "type-check:backend": "cd backend && npm run type-check",
+    "type-check:frontend": "cd frontend && npm run type-check",
+    
+    "health-check": "curl -f http://localhost:3001/health || exit 1",
+    
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    
+    "setup:github": "node scripts/setup-github-integration.js",
+    
+    "docs:serve": "docsify serve docs",
+    "docs:generate": "node scripts/generate-docs.js",
+    
+    "release": "semantic-release",
+    "release:dry": "semantic-release --dry-run",
+    
+    "security:audit": "npm audit && cd backend && npm audit && cd ../frontend && npm audit",
+    "security:fix": "npm audit fix && cd backend && npm audit fix && cd ../frontend && npm audit fix",
+    
+    "clean": "npm run clean:deps && npm run clean:build",
+    "clean:deps": "rm -rf node_modules backend/node_modules frontend/node_modules",
+    "clean:build": "rm -rf backend/dist frontend/build",
+    
+    "prepare": "husky install",
+    "pre-commit": "lint-staged",
+    "pre-push": "npm test"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "chokidar-cli": "^3.0.0",
+    "concurrently": "^8.2.2",
+    "docsify-cli": "^4.4.4",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "nodemon": "^3.0.2",
+    "prettier": "^3.1.1",
+    "semantic-release": "^22.0.12"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test"
+    }
+  }
+}
